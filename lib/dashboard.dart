@@ -18,7 +18,7 @@ class _MyGridScreenState extends State<MyGridScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("THE BOYS FLOW CHART")),
+        title: Center(child: Text("THE BOYS' FLOW CHART")),
         backgroundColor: Colors.green,
       ),
       body: Center(
