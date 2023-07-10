@@ -1,7 +1,7 @@
-// import 'package:camera/camera.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'camera.dart';
 import 'dashboard.dart';
@@ -31,14 +31,14 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-  Scaffold(
+      Scaffold(
         appBar: AppBar(
           title: Center(child: Text('Sign Up')),
 
         ),
         body: SignUpForm(),
 
-    );
+      );
   }
 }
 
@@ -158,7 +158,6 @@ class _SignUpFormState extends State<SignUpForm> {
     }
   }
 }
-
 
 
 
