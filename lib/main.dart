@@ -9,7 +9,6 @@ import 'flowchart.dart';
 
 
 void main()  {
-
   runApp(MyApp());
 
 }
@@ -438,14 +437,15 @@ class FirstTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Container(
+        height: double.infinity,
+        width: double.infinity,
         decoration: BoxDecoration(
           image:  DecorationImage(
-            image: AssetImage("assets/groot.jpg"),
+            image: AssetImage("assest/do you trust me.jpg"),
             fit: BoxFit.cover,
           ),
         ),
-        height: 300,
-        width: 200,
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -457,7 +457,15 @@ class FirstTab extends StatelessWidget {
                     MaterialPageRoute(builder: (context) => ButtonScreen()),
                   );
                 },
-                child: Center(child: Text("BUTTONS")),
+                child: Container(
+                  height: 80,
+                    width: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10), // Adjust the radius value as needed
+                      // Set the desired background color
+                    ),
+
+                    child: Center(child: Text("BUTTONS"))),
               ),
             ),
             ElevatedButton(
@@ -467,7 +475,16 @@ class FirstTab extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => StackScreen()),
                 );
               },
-              child: Center(child: Text("STACK")),
+              child: Container(
+                height: 100,
+                width: 100,
+                child: Column(
+
+                  children: [
+                    Center(child: Center(child: Text("STACK"))),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
@@ -482,10 +499,16 @@ class SecondTab extends StatelessWidget {
     return Center(
 
       child: Container(
+        decoration: BoxDecoration(
+          image:  DecorationImage(
+            image: AssetImage(".jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
 
 
-        height: 400,
-        width: 200,
+
+
 
 
 
