@@ -17,10 +17,10 @@ void main()  {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Sign Up Example',
       color: Colors.indigoAccent,
-      home: SignUpScreen(),
+      home: Registrationform(),
     );
   }
 }
