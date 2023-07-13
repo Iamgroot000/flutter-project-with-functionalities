@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:untitled2/Registration.dart';
 
 import 'camera.dart';
 import 'dashboard.dart';
@@ -441,7 +442,7 @@ class FirstTab extends StatelessWidget {
         width: double.infinity,
         decoration: BoxDecoration(
           image:  DecorationImage(
-            image: AssetImage("assest/do you trust me.jpg"),
+            image: AssetImage(""),
             fit: BoxFit.cover,
           ),
         ),
@@ -537,6 +538,16 @@ class SecondTab extends StatelessWidget {
               },
               child: Text("CAMERA"),
             ),
+            ElevatedButton(
+              onPressed:()
+    {
+      Navigator.push(
+        context, MaterialPageRoute(builder: (context) => Registrationform()),
+      );
+    },
+    child: Text("Registration"),
+    ),
+
           ],
         ),
       ),);
