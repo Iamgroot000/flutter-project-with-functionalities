@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       title: 'Sign Up Example',
       color: Colors.indigoAccent,
-      home: Registrationform(),
+      home: RegistrationForm(),
     );
   }
 }
@@ -542,7 +542,7 @@ class SecondTab extends StatelessWidget {
               onPressed:()
     {
       Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Registrationform()),
+        context, MaterialPageRoute(builder: (context) => RegistrationForm()),
       );
     },
     child: Text("Registration"),
