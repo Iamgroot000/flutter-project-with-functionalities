@@ -115,7 +115,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               padding: const EdgeInsets.only(top: 12.0),
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.height * 0.2,
+                                MediaQuery.of(context).size.height * 0.18,
                                 width:
                                 MediaQuery.of(context).size.width * 0.8,
                                 color: Colors.white,
@@ -156,7 +156,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                       height: MediaQuery.of(context)
                                           .size
                                           .height *
-                                          0.2,
+                                          0.18,
                                       width: MediaQuery.of(context)
                                           .size
                                           .width *
@@ -198,7 +198,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     height: MediaQuery.of(context)
                                         .size
                                         .height *
-                                        0.2,
+                                        0.18,
                                     width: MediaQuery.of(context)
                                         .size
                                         .width *
@@ -229,7 +229,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     height: MediaQuery.of(context)
                                         .size
                                         .height *
-                                        0.2,
+                                        0.18,
                                     width: MediaQuery.of(context)
                                         .size
                                         .width *

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-//import 'package:firebase_core/firebase_core.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:untitled2/Registration.dart';
 
 
@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Sign Up Example',
       color: Colors.indigoAccent,
-      home:  SignUpScreen(),
+      debugShowCheckedModeBanner: false,
+      home:  RegistrationForm(),
     );
   }
 }
@@ -549,6 +550,16 @@ class SecondTab extends StatelessWidget {
     },
     child: Text("Registration"),
     ),
+
+            ElevatedButton(
+              onPressed:()
+              {
+                Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => RegistrationForm()),
+                );
+              },
+              child: Text("Maps"),
+            ),
 
           ],
         ),
