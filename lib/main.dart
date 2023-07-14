@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:untitled2/Registration.dart';
+
+
 
 import 'camera.dart';
 import 'dashboard.dart';
@@ -17,10 +19,10 @@ void main()  {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       title: 'Sign Up Example',
       color: Colors.indigoAccent,
-      home: RegistrationForm(),
+      home:  SignUpScreen(),
     );
   }
 }

@@ -19,7 +19,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
   ];
 
   int _currentPageIndex = 0;
-  List<String> _answers = ['', '', ''];
+  List<String> _answers = ['', '', '', '', ''];
+  List<TextEditingController> _answerControllers = [];
 
   void _goToPage(int index) {
     _pageController.animateToPage(
@@ -38,6 +39,8 @@ class _RegistrationFormState extends State<RegistrationForm> {
         });
         _goToPage(_currentPageIndex);
       }
+    } else {
+      // Reached the end of the questions, you can perform additional actions here
     }
   }
 
@@ -50,24 +53,49 @@ class _RegistrationFormState extends State<RegistrationForm> {
     }
   }
 
+  void _updateAnswer(String value) {
+    _answers[_currentPageIndex] = value;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _answerControllers = List.generate(
+      _questions.length,
+          (index) => TextEditingController(),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (final controller in _answerControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightBlue,
         title: const Center(child: Text("Registration Form")),
       ),
       body: Column(
         children: [
           Container(
+
             height: MediaQuery.of(context).size.height * 0.5,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(color: Colors.white),
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(13.0),
                   child: CircleAvatar(
+                    backgroundColor: Colors.lightGreen,
                     radius: MediaQuery.of(context).size.width * 0.1,
                   ),
                 ),
@@ -256,7 +284,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             borderRadius: BorderRadius.circular(20),
                             color: Colors.black12,
                           ),
-                          height: 60,
+                          height: 50,
                           width: 550,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -301,13 +329,23 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         shape: BoxShape.circle,
                         color: Colors.blue, // Customize the color of the circle
                       ),
-                      child: IconButton(
-                        onPressed: () {
-                          // Handle action when the button in the bottom-right corner is pressed
-                        },
-                        icon: Icon(
-                          Icons.add,
-                          color: Colors.white, // Customize the color of the icon
+                      // Add any other widgets or content you want here
+                    ),
+                  ),
+                  SizedBox(width: 10,),
+                  Positioned(
+                    bottom: 80, // Adjust the position as needed
+                    left: 16, // Adjust the position as needed
+                    right: 16, // Adjust the position as needed
+                    child: Container(
+                      height: 50,
+                      width: 100,
+                      child: TextField(
+                        controller: _answerControllers[_currentPageIndex],
+                        onChanged: _updateAnswer,
+                        decoration: InputDecoration(
+                          labelText: 'Answer', // The label text for the TextField
+                          //border: OutlineInputBorder(),
                         ),
                       ),
                     ),
