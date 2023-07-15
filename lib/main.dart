@@ -23,9 +23,10 @@ class WelcomeApp extends StatelessWidget {
     return MaterialApp(
       title: 'Welcome Page Animation',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.green,
       ),
       home: WelcomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
