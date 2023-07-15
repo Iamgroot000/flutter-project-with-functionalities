@@ -25,7 +25,7 @@ class WelcomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: WelcomePage(),
+      home:MyHomePage  (),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -100,6 +100,7 @@ class _WelcomePageState extends State<WelcomePage>
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+
                   ),
                 ),
                 SizedBox(width:8),
@@ -621,87 +622,108 @@ class FirstTab extends StatelessWidget {
   }
 }
 
+
 class SecondTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-
       child: Container(
         decoration: BoxDecoration(
-          image:  DecorationImage(
+          image: DecorationImage(
             image: AssetImage(".jpg"),
             fit: BoxFit.cover,
           ),
         ),
-
-
-
-
-
-
-
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-
-          children: [
-
-
-            ElevatedButton(
-                onPressed: (){ Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyGridScreen()),
-                );
-
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.yellow),
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                offset: Offset(0, 2),
+                blurRadius: 4.0,
+                spreadRadius: 2.0,
+              ),
+            ],
+          ),
+          height: 80,
+          width: 600,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyGridScreen()),
+                  );
                 },
-                child: Text("Flow chart")
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CameraExampleHome()),
-
-                );
-              },
-              child: Text("CAMERA"),
-            ),
-            ElevatedButton(
-              onPressed:()
-    {
-      Navigator.push(
-        context, MaterialPageRoute(builder: (context) => RegistrationForm()),
-      );
-    },
-    child: Text("Registration"),
-    ),
-
-            ElevatedButton(
-              onPressed:()
-              {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => RegistrationForm()),
-                );
-              },
-              child: Text("Registration"),
-            ),
-
-            ElevatedButton(
-              onPressed:()
-              {
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => whatsapp()),
-                );
-              },
-              child: Text("WhatsApp"),
-            ),
-
-          ],
+                label: "Flow chart",
+              ),
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CameraExampleHome()),
+                  );
+                },
+                label: "CAMERA",
+              ),
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => RegistrationForm()),
+                  );
+                },
+                label: "Registration",
+              ),
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => whatsapp ()),
+                  );
+                },
+                label: "WhatsApp",
+              ),
+            ],
+          ),
         ),
-      ),);
+      ),
+    );
+  }
+}
 
+class CustomButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final String label;
 
+  const CustomButton({
+    required this.onPressed,
+    required this.label,
+  });
 
-
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      style: ElevatedButton.styleFrom(
+        primary: Colors.blue, // Change the button color to your preference
+        padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+        ),
+      ),
+    );
   }
 }
 
