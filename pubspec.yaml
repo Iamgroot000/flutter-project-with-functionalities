@@ -46,6 +46,11 @@ dependencies:
   firebase_auth: ^4.6.3
   google_maps_flutter: ^2.3.1
   firebase_core: ^2.14.0
+  get: any
+  loading_overlay: ^0.3.0 #CREATES A OVERLAY WHEN SOMETHING IS LOADING IN THE BG
+  loading_animations: ^2.2.0 #HELPS IN SHOWING LOADING ANIMATIONS
+  path: ^1.8.3
+  image_picker: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +83,8 @@ flutter:
    - assest/deepeshphoyo.jpg
    - assest/do you trust me.jpg
    - assest/groot.jpg
+   - assest/wall.png
+   #- assest/wave.avi
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

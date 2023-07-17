@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled2/registration%20camera.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key}) : super(key: key);
@@ -94,12 +95,53 @@ class _RegistrationFormState extends State<RegistrationForm> {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(13.0),
-                  child: CircleAvatar(
-                    backgroundColor: Colors.lightGreen,
-                    radius: MediaQuery.of(context).size.width * 0.1,
+                  child: GestureDetector(
+                    onTap: () {
+                      // Handle the click event here
+                      // For example, you can navigate to a new screen or perform an action
+                      print('Camera icon clicked!');
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.lightGreen,
+                      radius: MediaQuery.of(context).size.width * 0.1,
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              // Handle the click event for the camera icon specifically
+                              print('Camera icon clicked!');
+                            },
+                      child:
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => CameraScreen()),
+                                );
+                              },
+                              child: Icon(
+                                Icons.camera_alt,
+                                color: Colors.white,
+                                size: MediaQuery.of(context).size.width * 0.1,
+                              ),
+                            ),
+
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(width: 16),
+
+
+
+
+
+
+
+
+                SizedBox(width: 16),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(18.0),
@@ -359,3 +401,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
     );
   }
 }
+
+
+

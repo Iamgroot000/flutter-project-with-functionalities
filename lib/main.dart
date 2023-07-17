@@ -25,7 +25,7 @@ class WelcomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home:MyHomePage  (),
+      home: RegistrationForm(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -630,7 +630,7 @@ class SecondTab extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage(".jpg"),
+            image: AssetImage("assest/wave.avif"),
             fit: BoxFit.cover,
           ),
         ),
