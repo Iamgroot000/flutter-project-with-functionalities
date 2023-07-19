@@ -280,17 +280,19 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 ),
               ),
-              Container(
-                child: TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    // You can add more advanced email validation logic here
-                    return null;
-                  },
+              Center(
+                child: Container(
+                  child: TextFormField(
+                    controller: _emailController,
+                    decoration: InputDecoration(labelText: 'Email'),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      // You can add more advanced email validation logic here
+                      return null;
+                    },
+                  ),
                 ),
               ),
               TextFormField(
