@@ -8,13 +8,17 @@ import 'package:untitled2/Registration.dart';
 
 import 'camera.dart';
 import 'dashboard.dart';
+import 'firebase_options.dart';
 import 'flowchart.dart';
 import 'mainwhatsapp.dart';
 
 
-void main()  {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(WelcomeApp());
-
 }
 
 class WelcomeApp extends StatelessWidget {
@@ -25,7 +29,7 @@ class WelcomeApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: RegistrationForm(),
+      home: WelcomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -159,15 +163,12 @@ class _WelcomePageState extends State<WelcomePage>
 class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return
-      Scaffold(
-        appBar: AppBar(
-          title: Center(child: Text('Sign Up')),
-
-        ),
-        body: SignUpForm(),
-
-      );
+    return Scaffold(
+      appBar: AppBar(
+        title: Center(child: Text('Sign Up')),
+      ),
+      body: SignUpForm(),
+    );
   }
 }
 
@@ -191,38 +192,65 @@ class _SignUpFormState extends State<SignUpForm> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
-      // Perform signup logic here
       String name = _nameController.text;
       String email = _emailController.text;
       String password = _passwordController.text;
 
-      // Display success message or navigate to the next screen
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Success'),
-            content: Text('Sign up successful!'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  setState(() {
-                    _isSignedUp = true;
-                  });
-                },
-              ),
-            ],
-          );
-        },
-      );
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // User is successfully signed up. You can store additional user information in Firestore or any other database.
+
+        showDialog(
+
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: Colors.limeAccent,
+
+              title: Text('Success'),
+              content: Text('Sign up successful!'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    setState(() {
+                      _isSignedUp = true;
+                    });
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } catch (e) {
+        // Error occurred during sign up. Handle the error appropriately.
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Sign up failed: ${e.toString()}'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -236,21 +264,23 @@ class _SignUpFormState extends State<SignUpForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Container(
-
-                child: TextFormField(
-                  controller: _nameController,
-                  decoration: InputDecoration(labelText: 'Name'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter your name';
-                    }
-                    return null;
-                  },
+              Center(
+                child: Container(
+                  child: Center(
+                    child: TextFormField(
+                      controller: _nameController,
+                      decoration: InputDecoration(labelText: 'Name'),
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please enter your name';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
                 ),
               ),
               Container(
-
                 child: TextFormField(
                   controller: _emailController,
                   decoration: InputDecoration(labelText: 'Email'),
@@ -275,18 +305,39 @@ class _SignUpFormState extends State<SignUpForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 16.0),
-              ElevatedButton(
-                child: Text('Sign Up'),
-                onPressed: _submitForm,
-              ),
-            ],
+        SizedBox(height: 16.0),
+        GestureDetector(
+          onTap: () {
+            // Add navigation logic here, for example:
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => LoginScreen()),
+            );
+          },
+          child: RichText(
+            text: TextSpan(
+              text: "User who already have an account, ",
+              style: TextStyle(color: Colors.black),
+              children: [
+                TextSpan(
+                  text: "Login",
+                  style: TextStyle(
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-      );
+
+
+        ]),
+        ));
     }
   }
 }
+
 
 
 
@@ -303,7 +354,9 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(
+        title: Text('Login'),
+      ),
       body: Container(
         padding: EdgeInsets.all(16.0),
         child: LoginForm(),
@@ -329,31 +382,60 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
       String email = _emailController.text;
       String password = _passwordController.text;
 
-      // Display success message or navigate to the next screen
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Success'),
-            content: Text('Login successful!'),
-            actions: <Widget>[
-              TextButton(
-                child: Text('OK'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  // Navigate to the next screen or perform any desired action
-                },
-              ),
-            ],
-          );
-        },
-      );
+      try {
+        UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+        );
+
+        // Login successful. You can now navigate to the next screen or perform any desired action.
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Success'),
+              content: Text('Login successful!'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>MyHomePage()));
+                    // Navigate to the next screen or perform any desired ;action
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } catch (e) {
+        // Login failed. Handle the error appropriately.
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('Login failed: ${e.toString()}'),
+              actions: <Widget>[
+                TextButton(
+                  child: Text('OK'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      }
     }
   }
 
@@ -405,21 +487,13 @@ class _LoginFormState extends State<LoginForm> {
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) =>MyHomePage()),
-              );
-
-
-            },
+            onPressed: _submitForm,
           ),
         ],
       ),
     );
   }
 }
-
 /*void main() {
   runApp(MaterialApp(
     title: 'Login Example',
