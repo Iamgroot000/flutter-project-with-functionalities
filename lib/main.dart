@@ -295,17 +295,19 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                 ),
               ),
-              TextFormField(
-                controller: _passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
-                obscureText: true,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  // You can add more advanced password validation logic here
-                  return null;
-                },
+              Center(
+                child: TextFormField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(labelText: 'Password'),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Please enter a password';
+                    }
+                    // You can add more advanced password validation logic here
+                    return null;
+                  },
+                ),
               ),
         SizedBox(height: 16.0),
         GestureDetector(
