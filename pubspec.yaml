@@ -51,6 +51,7 @@ dependencies:
   loading_animations: ^2.2.0 #HELPS IN SHOWING LOADING ANIMATIONS
   path: ^1.8.3
   image_picker: ^1.0.1
+  cloud_firestore: ^4.8.3
 
 dev_dependencies:
   flutter_test:

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled2/registration%20camera.dart';
 
@@ -22,6 +24,11 @@ class _RegistrationFormState extends State<RegistrationForm> {
   int _currentPageIndex = 0;
   List<String> _answers = ['', '', '', '', ''];
   List<TextEditingController> _answerControllers = [];
+  TextEditingController nameController =TextEditingController();
+  TextEditingController ageController =TextEditingController();
+  TextEditingController heightController =TextEditingController();
+  TextEditingController weightController =TextEditingController();
+
 
   void _goToPage(int index) {
     _pageController.animateToPage(
@@ -86,8 +93,14 @@ class _RegistrationFormState extends State<RegistrationForm> {
         children: [
           Container(
 
-            height: MediaQuery.of(context).size.height * 0.5,
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height * 0.5,
+            width: MediaQuery
+                .of(context)
+                .size
+                .width,
             decoration: BoxDecoration(color: Colors.white),
 
             child: Row(
@@ -103,7 +116,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.lightGreen,
-                      radius: MediaQuery.of(context).size.width * 0.1,
+                      radius: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.1,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
@@ -112,18 +128,22 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               // Handle the click event for the camera icon specifically
                               print('Camera icon clicked!');
                             },
-                      child:
+                            child:
                             InkWell(
                               onTap: () {
                                 Navigator.push(
                                   context,
-                                  MaterialPageRoute(builder: (context) => CameraScreen()),
+                                  MaterialPageRoute(
+                                      builder: (context) => CameraScreen()),
                                 );
                               },
                               child: Icon(
                                 Icons.camera_alt,
                                 color: Colors.white,
-                                size: MediaQuery.of(context).size.width * 0.1,
+                                size: MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * 0.1,
                               ),
                             ),
 
@@ -135,19 +155,19 @@ class _RegistrationFormState extends State<RegistrationForm> {
                 ),
 
 
-
-
-
-
-
-
                 SizedBox(width: 16),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(18.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
-                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery
+                          .of(context)
+                          .size
+                          .height * 0.4,
+                      width: MediaQuery
+                          .of(context)
+                          .size
+                          .width * 0.8,
                       color: Colors.white,
                       child: Form(
                         key: _formKey,
@@ -157,22 +177,31 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               padding: const EdgeInsets.only(top: 12.0),
                               child: Container(
                                 height:
-                                MediaQuery.of(context).size.height * 0.18,
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .height * 0.18,
                                 width:
-                                MediaQuery.of(context).size.width * 0.8,
+                                MediaQuery
+                                    .of(context)
+                                    .size
+                                    .width * 0.8,
                                 color: Colors.white,
                                 child: Row(
                                   children: [
                                     Container(
-                                      height: MediaQuery.of(context)
+                                      height: MediaQuery
+                                          .of(context)
                                           .size
                                           .height *
                                           0.2,
-                                      width: MediaQuery.of(context)
+                                      width: MediaQuery
+                                          .of(context)
                                           .size
                                           .width *
                                           0.3,
                                       child: TextFormField(
+                                        controller: nameController,
                                         decoration: InputDecoration(
                                           labelText: 'Name',
                                           labelStyle: TextStyle(
@@ -189,21 +218,24 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                           return null;
                                         },
                                         onSaved: (value) {
-                                          _answers[0] = value ?? '';
+                                         _answers[0] = value ?? '';
                                         },
                                       ),
                                     ),
                                     const SizedBox(width: 40),
                                     Container(
-                                      height: MediaQuery.of(context)
+                                      height: MediaQuery
+                                          .of(context)
                                           .size
                                           .height *
                                           0.18,
-                                      width: MediaQuery.of(context)
+                                      width: MediaQuery
+                                          .of(context)
                                           .size
                                           .width *
                                           0.3,
                                       child: TextFormField(
+                                        controller: ageController,
                                         decoration: InputDecoration(
                                           labelText: 'Age',
                                           labelStyle: TextStyle(
@@ -230,22 +262,31 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             ),
                             Container(
                               height:
-                              MediaQuery.of(context).size.height * 0.2,
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .height * 0.2,
                               width:
-                              MediaQuery.of(context).size.width * 0.8,
+                              MediaQuery
+                                  .of(context)
+                                  .size
+                                  .width * 0.8,
                               color: Colors.white,
                               child: Row(
                                 children: [
                                   Container(
-                                    height: MediaQuery.of(context)
+                                    height: MediaQuery
+                                        .of(context)
                                         .size
                                         .height *
                                         0.18,
-                                    width: MediaQuery.of(context)
+                                    width: MediaQuery
+                                        .of(context)
                                         .size
                                         .width *
                                         0.3,
                                     child: TextFormField(
+                                      controller: heightController,
                                       decoration: InputDecoration(
                                         labelText: 'Height',
                                         labelStyle: TextStyle(
@@ -268,15 +309,18 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                   ),
                                   const SizedBox(width: 40),
                                   Container(
-                                    height: MediaQuery.of(context)
+                                    height: MediaQuery
+                                        .of(context)
                                         .size
                                         .height *
                                         0.18,
-                                    width: MediaQuery.of(context)
+                                    width: MediaQuery
+                                        .of(context)
                                         .size
                                         .width *
                                         0.3,
                                     child: TextFormField(
+                                      controller: weightController,
                                       decoration: InputDecoration(
                                         labelText: 'Weight',
                                         labelStyle: TextStyle(
@@ -298,7 +342,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                                     ),
                                   ),
                                   ElevatedButton(
-                                    onPressed: _goToNextPage,
+                                    onPressed: _savePersonalData,
                                     child: const Text("Next"),
                                   ),
                                 ],
@@ -400,6 +444,32 @@ class _RegistrationFormState extends State<RegistrationForm> {
       ),
     );
   }
+
+
+
+    ///
+  void _savePersonalData() async {
+
+    FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+    await firebaseFirestore.collection("Registration").doc().set({
+     "name": nameController.text,
+     "age": ageController.text,
+     "height": heightController.text,
+     "weight": weightController.text,
+   });
+
+
+
+  }
+
+
+   ///
+
+
+
+
+
 }
 
 
